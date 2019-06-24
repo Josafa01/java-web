@@ -85,13 +85,12 @@
 		</nav>
 
 
-		
 		<div class="sidenav">
-	  		<a href="Painel" class="active">Home</a>
-	  		<a href="#">Cadastrar</a>
-	  		<a href="#">Vendas</a>
-	  		<a href="#">Busca</a>
-	  		<a href="#">Relatorio</a>
+			<a href="Painel" class="active a" data-filter="home">Home</a> 
+			<a href="Cadastrar" class="a" data-filter="cadastrar">Cadastrar</a>
+			<a href="#" class="a" data-filter="vendas">Vendas</a> 
+			<a href="#" class="a" data-filter="busca">Busca</a> 
+			<a href="#" class="a" data-filter="relatorio">Relatorio</a>
 		</div>
 
 		<div class="main">
@@ -120,6 +119,7 @@
 	<script src="resource/js/bootstrap.min.js"></script>
 	<!-- Chart JS library -->
 	<script src="resource/js/Chart.min.js"></script>
+	<script src="resource/js/script.js"></script>
 	
 	<script type="text/javascript">
 		let primeiroGrafico = document.getElementById('primeiroGrafico').getContext('2d');                
@@ -171,5 +171,7 @@
 	   }
 	});
 	</script>
+	
+	
 </body>
 </html>
