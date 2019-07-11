@@ -12,7 +12,16 @@ public class BeanClients {
 	private String bairro;
 	private String rua;
 	private String compras;
+	private String status;
 	
+	public String getStatus() {
+		return status;
+	}
+
+	public String setStatus(String status) {
+		return this.status = status;
+	}
+
 	public Long getId() {
 		return id;
 	}

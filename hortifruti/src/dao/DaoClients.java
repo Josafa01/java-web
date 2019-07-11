@@ -20,7 +20,9 @@ public class DaoClients {
 	
 	public void insert(BeanClients clientes) {
 		try {
-			String sql = "INSERT INTO clients(nome, sobrenome, idade, email, telefone, cidade, bairro, rua) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+			clientes.setStatus("ativado");
+			
+			String sql = "INSERT INTO clients(nome, sobrenome, idade, email, telefone, cidade, bairro, rua, status) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement insert = connection.prepareStatement(sql);
 			insert.setString(1, clientes.getNome());
 			insert.setString(2, clientes.getSobrenome());
@@ -30,6 +32,7 @@ public class DaoClients {
 			insert.setString(6, clientes.getCidade());
 			insert.setString(7, clientes.getBairro());
 			insert.setString(8, clientes.getRua());
+			insert.setString(9, clientes.getStatus());
 			insert.execute();
 			connection.commit();
 		} catch(Exception e) {
@@ -44,7 +47,28 @@ public class DaoClients {
 	
 	public List<BeanClients> listAll() throws Exception {
 		List<BeanClients> listAll = new ArrayList<BeanClients>();
-		String sql = "SELECT * FROM clients";
+		String sql = "SELECT * FROM clients where status <> 'desativado'";
+		PreparedStatement statement = connection.prepareStatement(sql);
+		ResultSet resultSet = statement.executeQuery();
+			while(resultSet.next()) {
+				BeanClients beanClients = new BeanClients();
+				beanClients.setId(resultSet.getLong("id"));
+				beanClients.setNome(resultSet.getString("nome"));
+				beanClients.setSobrenome(resultSet.getString("sobrenome"));
+				beanClients.setIdade(resultSet.getInt("idade"));
+				beanClients.setEmail(resultSet.getString("email"));
+				beanClients.setTelefone(resultSet.getString("telefone"));
+				beanClients.setCidade(resultSet.getString("cidade"));
+				beanClients.setBairro(resultSet.getString("bairro"));
+				beanClients.setRua(resultSet.getString("rua"));
+				listAll.add(beanClients);
+			}
+			return listAll;
+	}
+	
+	public List<BeanClients> listAllDEL() throws Exception {
+		List<BeanClients> listAll = new ArrayList<BeanClients>();
+		String sql = "SELECT * FROM clients where status = 'desativado'";
 		PreparedStatement statement = connection.prepareStatement(sql);
 		ResultSet resultSet = statement.executeQuery();
 			while(resultSet.next()) {
@@ -83,12 +107,16 @@ public class DaoClients {
 		return null;
 	}
 	
-	public void delete(String id) {
+	public BeanClients delete(String id) {
 		if (id != null && !id.isEmpty()) {
 			try {
-				String sql = "DELETE FROM clients WHERE id = "+ id;
-				PreparedStatement preparedStatement = connection.prepareStatement(sql);
-				preparedStatement.execute();
+				BeanClients clientes = new BeanClients();
+				
+				clientes.setStatus("desativado");
+				String sql = "UPDATE clients SET status = ? WHERE id = "+id;
+				PreparedStatement preparedStatement = connection.prepareStatement(sql);			
+				preparedStatement.setString(1, clientes.getStatus());
+				preparedStatement.executeUpdate();
 				connection.commit();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -99,6 +127,30 @@ public class DaoClients {
 				}
 			}
 		}
+		return null;
+	}
+	
+	public BeanClients activate(String id) {
+		if (id != null && !id.isEmpty()) {
+			try {
+				BeanClients clientes = new BeanClients();
+				
+				clientes.setStatus("ativado");
+				String sql = "UPDATE clients SET status = ? WHERE id = "+id;
+				PreparedStatement preparedStatement = connection.prepareStatement(sql);			
+				preparedStatement.setString(1, clientes.getStatus());
+				preparedStatement.executeUpdate();
+				connection.commit();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				try {
+					connection.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		}
+		return null;
 	}
 	
 	public void update(BeanClients clientes) {

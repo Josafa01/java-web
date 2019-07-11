@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%= session.getAttribute("email") %>
-<% 
+<%=session.getAttribute("email")%>
+<%
 	response.setHeader("Cache-control", "no-cache, no-store");
 	response.setHeader("pragma", "no-cache");
 	response.setHeader("Expires", "-1");
@@ -45,16 +45,21 @@
 	font-size: 25px;
 }
 
-.align-card-deck {
-	margin-top: 21%;
-    margin-left: 26%;
-    margin-right: 4%;
+.style-table {
+	margin-top: 20%;
+	margin-left: 10%;
 }
 
-.link-a-cad{
-	color:#ffffff;
-	font-weight:bold;
-	text-decoration:none; 
+.title-table-cli {
+	margin-top: 12%;
+	margin-bottom: -10%;
+	margin-left: 15%;
+}
+
+#btn-back {
+    margin-top: 268%;
+    margin-bottom: -322%;
+    margin-left: 165%;
 }
 </style>
 </head>
@@ -66,7 +71,7 @@
 				<div class="widget_title_bar"></div></li>
 		</ul>
 	</nav>
-	
+
 	<div class="sidenav">
 			<a href="Painel" data-filter="home">Home</a> 
 			<a href="Cadastrar" class="active" data-filter="cadastrar">Cadastrar</a>
@@ -74,31 +79,58 @@
 			<a href="#" data-filter="busca">Busca</a> 
 			<a href="#" data-filter="relatorio">Relatorio</a>
 			<a href="Leia" data-filter="relatorio">LEIA</a>
+		</div>
+
+	<div class="container">
+		<h2 class="title-table-cli d-flex justify-content-center">Tabela de Clientes</h2>
+		<div class="d-flex justify-content-end">
+			<a href="ClientesTable">
+				<button type="button" class="btn btn-danger" id="btn-back">Voltar</button>
+			</a>
+		</div>
+		<table class="table table-dark table-striped style-table">
+			<thead>
+				<tr>
+					<th>Nome</th>
+					<th>Sobrenome</th>
+					<th>idade</th>
+					<th>E-mail</th>
+					<th>Telefone</th>
+					<th>Cidade</th>
+					<th>Bairro</th>
+					<th>Rua</th>
+					<th>Ações</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${clientes}" var="cli">
+					<tr>
+						<td><c:out value="${cli.nome}" /></td>
+						<td><c:out value="${cli.sobrenome}" /></td>
+						<td><c:out value="${cli.idade}" /></td>
+						<td><c:out value="${cli.email}" /></td>
+						<td><c:out value="${cli.telefone}" /></td>
+						<td><c:out value="${cli.cidade}" /></td>
+						<td><c:out value="${cli.bairro}" /></td>
+						<td><c:out value="${cli.rua}" /></td>
+						<td>
+							<div class="btn-group">
+								<a href="ClientesDel?action=activate&user=${cli.id}" class="btn btn-success">Ativar</a> 
+								<a href="ClientesDel?action=edit&user=${cli.id}" class="btn btn-primary">Ver</a>
+							</div>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 	</div>
 
-	<div class="card-deck align-card-deck">
-		<div class="card bg-warning">
-			<div class="card-body text-center">
-				<td><a class="link-a-cad" href="ClientesTable?action=ShowAll">Cadastro de Clientes</a></td>
-			</div>
-		</div>
-		<div class="card bg-success">
-			<div class="card-body text-center">
-				<td><a class="link-a-cad" href="ProdutosTable?action=ShowAll">Cadastro de Produtos</a></td>
-			</div>
-		</div>
-		<div class="card bg-danger">
-		    <div class="card-body text-center">
-		      <td><a class="link-a-cad" href="VendedorTable?action=ShowAll">Cadastro de Vendedor</a></td>
-		    </div>
-		</div> 
-	</div>
 
 	<!-- jQuery library -->
 	<script src="resource/js/jquery-3.3.1.min.js"></script>
 	<!-- BootStrap JS library -->
 	<script src="resource/js/bootstrap.min.js"></script>
 	<script src="resource/js/script.js"></script>
-
+	
 </body>
 </html>

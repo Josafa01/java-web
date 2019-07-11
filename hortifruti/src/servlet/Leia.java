@@ -11,19 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.BeanClients;
-import dao.DaoClients;
 import dao.DaoLogin;
 
-
-@WebServlet("/ClientesTable")
-public class ClientesTable extends HttpServlet {
+@WebServlet("/Leia")
+public class Leia extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private DaoLogin daologin = new DaoLogin();
-	private DaoClients  daoclients = new DaoClients();
 
-	public ClientesTable() {
+	public Leia() {
 		super();
 	}
 
@@ -32,9 +28,6 @@ public class ClientesTable extends HttpServlet {
 
 		try {
 			
-			String action = request.getParameter("action");
-			String user = request.getParameter("user");
-
 			String sessionID = null;
 			Cookie[] cookies = request.getCookies();
 			if (cookies != null) {
@@ -53,31 +46,8 @@ public class ClientesTable extends HttpServlet {
 					RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 					dispatcher.forward(request, response);
 				} else {
-					
-					if(action != null && action.equalsIgnoreCase("ShowAll")) {
-						RequestDispatcher view = request.getRequestDispatcher("/clientes.jsp");
-						request.setAttribute("clientes", daoclients.listAll());
-						view.forward(request, response);
-						
-					} else if(action != null && action.equalsIgnoreCase("delete")) {
-						BeanClients clientes = daoclients.delete(user);
-						
-						RequestDispatcher view = request.getRequestDispatcher("/clientes.jsp");
-						request.setAttribute("clientes", daoclients.listAll());
-						view.forward(request, response);
-						
-					} else if(action != null && action.equalsIgnoreCase("edit")) {
-						BeanClients clientes = daoclients.edit(user);
-						RequestDispatcher view = request.getRequestDispatcher("/clientes-add.jsp");
-						request.setAttribute("cli", clientes);
-						view.forward(request, response);
-					}else {
-						RequestDispatcher view = request.getRequestDispatcher("/clientes.jsp");
-						request.setAttribute("clientes", daoclients.listAll());
-						view.forward(request, response);
-					}
-					
-					
+					RequestDispatcher dispatcher = request.getRequestDispatcher("Leia.jsp");
+					dispatcher.forward(request, response);
 				}
 
 				HttpSession session = request.getSession(true);
@@ -97,14 +67,7 @@ public class ClientesTable extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		String action = request.getParameter("action");
-		
-		if(action != null && action.equalsIgnoreCase("")) {
-			
-		}
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("clientes.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("Leia.jsp");
 		dispatcher.forward(request, response);
 	}
 

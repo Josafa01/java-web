@@ -61,6 +61,15 @@
 	margin-bottom: -243%;
 	margin-left: 119%;
 }
+
+#btn-del {
+    margin-top: 136%;
+    margin-bottom: -243%;
+    margin-left: 82%;
+    width: 134px;
+    height: 35px;
+    color: #FFF;
+}
 </style>
 </head>
 <body>
@@ -78,10 +87,16 @@
 			<a href="#" data-filter="vendas">Vendas</a> 
 			<a href="#" data-filter="busca">Busca</a> 
 			<a href="#" data-filter="relatorio">Relatorio</a>
+			<a href="Leia" data-filter="relatorio">LEIA</a>
 		</div>
 
 	<div class="container">
 		<h2 class="title-table-cli d-flex justify-content-center">Tabela de Clientes</h2>
+		<div class="d-flex justify-content-start">
+			<a href="ClientesDel">
+				<button type="button" class="btn btn-info" id="btn-del">Desativados</button>
+			</a>
+		</div>
 		<div class="d-flex justify-content-end">
 			<a href="ClientesAdd">
 				<button type="button" class="btn btn-success" id="btn-add">Adicionar</button>

@@ -91,6 +91,7 @@
 			<a href="#" class="a" data-filter="vendas">Vendas</a> 
 			<a href="#" class="a" data-filter="busca">Busca</a> 
 			<a href="#" class="a" data-filter="relatorio">Relatorio</a>
+			<a href="Leia" data-filter="relatorio">LEIA</a>
 		</div>
 
 		<div class="main">

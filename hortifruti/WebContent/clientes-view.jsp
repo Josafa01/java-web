@@ -129,58 +129,45 @@ body {
 		<div class="container style-form">
 		
 		<header class="hd">
-			<h1 class="title_page_cad">Cadastro de Clientes</h1>	
+			<h1 class="title_page_cad">Cliente Desativado</h1>	
 		</header>
-		
-		<% if(request.getAttribute("message") != null) {
-				out.print(request.getAttribute("message"));
-			} 
-		%>
 		
 		<form id="tarefasForm" method="POST" action="ClientesAdd">
 		  <input type="text" readonly="readonly" id="id" name="id" value="${cli.id}" />
 		  <div class="form-row">
 		    <div class="form-group col-md-6">
-		      <input type="text" class="form-control" id="inputName" name="nome" placeholder="Nome" value="${cli.nome}"/>
+		      <input type="text" class="form-control" readonly="readonly" id="inputName" name="nome" placeholder="Nome" value="${cli.nome}"/>
 		    </div>
 		    <div class="form-group col-md-6">
-		      <input type="text" class="form-control" id="inputSobrenome" name="sobrenome" placeholder="Sobrenome" value="${cli.sobrenome}" /> 
+		      <input type="text" class="form-control" readonly="readonly"  id="inputSobrenome" name="sobrenome" placeholder="Sobrenome" value="${cli.sobrenome}" /> 
 		    </div>
 		  </div>
 		  
 		  <div class="form-row">
 		  	<div class="form-group col-md-6">
-		      <input type="text" class="form-control" id="inputIdade" name="idade" placeholder="Idade" value="${cli.idade}" /> 
+		      <input type="text" class="form-control"  readonly="readonly" id="inputIdade" name="idade" placeholder="Idade" value="${cli.idade}" /> 
 		    </div>
 		    <div class="form-group col-md-6">
-		      <input type="email" class="form-control" id="inputEmail" name="email" placeholder="E-mail" value="${cli.email}" />
+		      <input type="email" class="form-control"  readonly="readonly" id="inputEmail" name="email" placeholder="E-mail" value="${cli.email}" />
 		    </div>
 		  </div>
 		 
 		 <div class="form-row">
 		  	<div class="form-group col-md-6">
-		      <input type="text" class="form-control" id="inputTelefone" name="telefone" placeholder="Telefone" value="${cli.telefone}" /> 
+		      <input type="text" class="form-control" readonly="readonly"  id="inputTelefone" name="telefone" placeholder="Telefone" value="${cli.telefone}" /> 
 		    </div>
 		    <div class="form-group col-md-6">
-		      <input type="text" class="form-control" id="inputCidade" name="cidade" placeholder="Cidade" value="${cli.cidade}" />
+		      <input type="text" class="form-control"  readonly="readonly" id="inputCidade" name="cidade" placeholder="Cidade" value="${cli.cidade}" />
 		    </div>
 		  </div>
 		  
 		  <div class="form-row">
 		  	<div class="form-group col-md-6">
-		      <input type="text" class="form-control" id="inputBairro" name="bairro" placeholder="Bairro" value="${cli.bairro}" /> 
+		      <input type="text" class="form-control"  readonly="readonly" id="inputBairro" name="bairro" placeholder="Bairro" value="${cli.bairro}" /> 
 		    </div>
 		    <div class="form-group col-md-6">
-		      <input type="text" class="form-control" id="inputRua" name="rua" placeholder="Rua" value="${cli.rua}" />
+		      <input type="text" class="form-control"  readonly="readonly" id="inputRua" name="rua" placeholder="Rua" value="${cli.rua}" />
 		    </div>
-		  </div>
-		 
-		  
-		  <div class="d-flex justify-content-center" >
-			<input type="submit" class="btn btn-success" id="btn-save"  value="Salvar" />
-			<a href="ClientesTable">
-				<button type="button" class="btn btn-danger" id="btn-back">Voltar</button>
-			</a>
 		  </div>
 		  
 		</form>

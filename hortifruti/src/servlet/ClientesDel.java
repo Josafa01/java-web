@@ -16,14 +16,14 @@ import dao.DaoClients;
 import dao.DaoLogin;
 
 
-@WebServlet("/ClientesTable")
-public class ClientesTable extends HttpServlet {
+@WebServlet("/ClientesDel")
+public class ClientesDel extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private DaoLogin daologin = new DaoLogin();
 	private DaoClients  daoclients = new DaoClients();
 
-	public ClientesTable() {
+	public ClientesDel() {
 		super();
 	}
 
@@ -55,25 +55,25 @@ public class ClientesTable extends HttpServlet {
 				} else {
 					
 					if(action != null && action.equalsIgnoreCase("ShowAll")) {
-						RequestDispatcher view = request.getRequestDispatcher("/clientes.jsp");
-						request.setAttribute("clientes", daoclients.listAll());
+						RequestDispatcher view = request.getRequestDispatcher("/clientes-del.jsp");
+						request.setAttribute("clientes", daoclients.listAllDEL());
 						view.forward(request, response);
 						
-					} else if(action != null && action.equalsIgnoreCase("delete")) {
-						BeanClients clientes = daoclients.delete(user);
+					} else if(action != null && action.equalsIgnoreCase("activate")) {
+						daoclients.activate(user);
 						
-						RequestDispatcher view = request.getRequestDispatcher("/clientes.jsp");
-						request.setAttribute("clientes", daoclients.listAll());
+						RequestDispatcher view = request.getRequestDispatcher("/clientes-del.jsp");
+						request.setAttribute("clientes", daoclients.listAllDEL());
 						view.forward(request, response);
 						
 					} else if(action != null && action.equalsIgnoreCase("edit")) {
 						BeanClients clientes = daoclients.edit(user);
-						RequestDispatcher view = request.getRequestDispatcher("/clientes-add.jsp");
+						RequestDispatcher view = request.getRequestDispatcher("/clientes-view.jsp");
 						request.setAttribute("cli", clientes);
 						view.forward(request, response);
 					}else {
-						RequestDispatcher view = request.getRequestDispatcher("/clientes.jsp");
-						request.setAttribute("clientes", daoclients.listAll());
+						RequestDispatcher view = request.getRequestDispatcher("/clientes-del.jsp");
+						request.setAttribute("clientes", daoclients.listAllDEL());
 						view.forward(request, response);
 					}
 					
